@@ -1,6 +1,6 @@
 {
 	"name": "react-native-shadowedbutton",
-	"version": "0.0.9",
+	"version": "0.1.1",
 	"private": false,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
@@ -18,5 +18,16 @@
 	},
 	"jest": {
 		"preset": "react-native"
-	}
+	},
+	"author": {
+		"name": "Brian Doherty",
+		"email": "bdoherty92@gmail.com",
+		"url": "http://bedoherty.com"
+	},
+	"repository": {
+	    "type": "git",
+	    "url": "https://github.com/bedoherty/react-native-shadowedbutton.git"
+	},
+	"license": "MIT",
+	"homepage": "https://github.com/bedoherty/react-native-shadowedbutton"
 }
