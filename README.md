@@ -13,10 +13,14 @@ import ShadowedButton from 'react-native-shadowedbutton';
           fontSize={28}
           fontFamily="brandon grotesque"
           text="Test Button"
+          shadowHeight={12}
+          borderRadius={5}
         />
 ```
 
 This builds an orange button with white, brandon grotesque font size 28.  The buttons dimensions can be controlled via the style prop.
+
+![Sample Button Display](http://i.imgur.com/5lmBMVa.png "Some sample buttons")
 
 ShadowedButton takes the following props
 
@@ -28,3 +32,5 @@ ShadowedButton takes the following props
 * fontFamily - Font family
 * text - Text to display on the button
 * onPress - On press handler for the button
+* borderRadius - Border radius for the button and its shadow
+* shadowHeight - Integer value that is the percent of the view that should be shadow.

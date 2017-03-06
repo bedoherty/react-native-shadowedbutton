@@ -45,12 +45,23 @@ export default class ShadowedButton extends Component {
           delayPressOut={0}
           >
           <View style={this.props.style}>
-            <View style={[styles.buttonBody, {backgroundColor: this.state.isPressed ? this.props.shadowColor : this.props.buttonColor} ]}>
+            <View style={[  styles.buttonBody, 
+                            {
+                              borderRadius: this.props.borderRadius, 
+                              height: ((100 - this.props.shadowHeight).toString() + "%"),  
+                              backgroundColor: this.state.isPressed ? this.props.shadowColor : this.props.buttonColor
+                            } 
+                        ]}>
             <Text style={ { fontSize: this.props.fontSize, color: this.props.fontColor, fontFamily: this.props.fontFamily} }>
                 {this.props.text}
             </Text>
             </View>
-            <View style={[styles.buttonShadow, {backgroundColor: this.state.isPressed ? this.props.buttonColor : this.props.shadowColor} ]}>
+            <View style={[  styles.buttonShadow, 
+                            {
+                              borderRadius: this.props.borderRadius, 
+                              backgroundColor: this.state.isPressed ? this.props.buttonColor : this.props.shadowColor
+                            } 
+                        ]}>
             </View>
           </View>
         </TouchableHighlight>
