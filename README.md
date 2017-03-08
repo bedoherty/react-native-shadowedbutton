@@ -8,7 +8,6 @@ import ShadowedButton from 'react-native-shadowedbutton';
 <ShadowedButton
           style={ {flex: 0, height: 50, width: 400} }
           buttonColor="#f05926"
-          shadowColor="#c2513c"
           fontColor="white"
           fontSize={28}
           fontFamily="brandon grotesque"
@@ -26,7 +25,6 @@ ShadowedButton takes the following props
 
 * style - Style for the button container
 * buttonColor - Main color of the button
-* shadowColor - Color of the button's shadow
 * fontColor - Font color
 * fontSize - Font size
 * fontFamily - Font family
@@ -34,3 +32,23 @@ ShadowedButton takes the following props
 * onPress - On press handler for the button
 * borderRadius - Border radius for the button and its shadow
 * shadowHeight - Integer value that is the percent of the view that should be shadow.
+
+Changelog: 
+
+0.2.1
+* First draft of SVG based path backgrounds implemented, documentation/testing pending
+
+0.2.0
+* Updated readme to reflect the removal of shadowColor prop
+
+0.1.9
+* Bugfixes
+* iOS and Android working
+* Opacity removed
+
+0.1.7
+* iOS stuff
+
+0.1.6
+* Shadow color procedurally generated
+* Fixed bug with shadow showing when pressed
