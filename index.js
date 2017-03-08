@@ -6,6 +6,11 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import Color from 'color';
 
+import Svg,{
+    G,
+    Path
+} from 'react-native-svg';
+
 const styles = StyleSheet.create({
   textContainer: {
     position: 'absolute',
@@ -13,7 +18,7 @@ const styles = StyleSheet.create({
     left: 0,
     width: '100%',
     height: '100%',
-    zIndex: 2,
+    zIndex: 3,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -41,12 +46,13 @@ export default class ShadowedButton extends Component {
     super(props);
     this.state = {
       isPressed: false,
-      width: 0,
-      height: 0
+      width: 400,
+      height: 100
     };
   }
 
-  measureView(Event) {
+  measureView(event) {
+    console.log(event);
     this.setState({
       width: event.nativeEvent.layout.width,
       height: event.nativeEvent.layout.height
@@ -56,7 +62,6 @@ export default class ShadowedButton extends Component {
   render() {
     return (
       <TouchableHighlight 
-        onLayout={(event) => this.measureView(event)}
         activeOpacity={1}
         underlayColor="transparent" 
         onPress={this.props.onPress}
@@ -65,13 +70,16 @@ export default class ShadowedButton extends Component {
         delayPressIn={0}
         delayPressOut={0}
         >
-        <View style={this.props.style}>
+        <View style={this.props.style}
+              collapsable={false}
+              renderToHardwareTextureAndroid={true}
+              onLayout={(event) => this.measureView(event)}>
           <View style={styles.textContainer}>
             <Text style={ { fontSize: this.props.fontSize, color: this.props.fontColor, fontFamily: this.props.fontFamily} }>
                 {this.props.text}
             </Text>
           </View>
-          {("svgPath" in this.props && "svgViewbox" in this.props) ? (
+          {(this.props.svgPath && this.props.svgViewbox) ? (
             <View style={[styles.buttonBody, {top: this.state.isPressed ? (this.props.shadowHeight.toString() + "%") : 0}]}>
               <Svg height={(this.state.height * (100 - this.props.shadowHeight) / 100)} 
                 width={this.state.width}
@@ -80,28 +88,33 @@ export default class ShadowedButton extends Component {
                 <Path fill={this.props.buttonColor} d={this.props.svgPath}/>
               </Svg>
             </View>
-            <View style={styles.buttonShadow}>
-              <Svg height={(this.state.height * (100 - this.props.shadowHeight) / 100)} 
-                width={this.state.width}
-                viewBox={this.props.svgViewbox}
-                preserveAspectRatio="none">
-                <Path fill={Color(this.props.buttonColor).darken(0.25).string()} d={this.props.svgPath}/>
-              </Svg>
-            </View>
           ) : (
             <View style={[  styles.buttonBody, 
                           {
                             top: this.state.isPressed ? (this.props.shadowHeight.toString() + "%") : 0,
                             borderRadius: this.props.borderRadius, 
                             height: ((100 - this.props.shadowHeight).toString() + "%"),  
+                            width: "100%",
                             backgroundColor: this.props.buttonColor
                           } 
                       ]} />
+          )}
+          {(this.props.svgPath && this.props.svgViewbox) ? (
+            <View style={styles.buttonShadow}>
+              <Svg height={(this.state.height * (100 - this.props.shadowHeight) / 100)} 
+                width={this.state.width}
+                viewBox={this.props.svgViewbox}
+                preserveAspectRatio="none">
+                <Path fill={Color(this.props.buttonColor).darken(0.25).hex()} d={this.props.svgPath}/>
+              </Svg>
+            </View>
+          ) : (
             <View style={[  styles.buttonShadow, 
                           {
                             borderRadius: this.props.borderRadius, 
                             height: ((100 - this.props.shadowHeight).toString() + "%"),  
-                            backgroundColor: Color(this.props.buttonColor).darken(0.25).string()
+                            width: "100%",
+                            backgroundColor: Color(this.props.buttonColor).darken(0.25).hex().string()
                           } 
                       ]} />
           )}
