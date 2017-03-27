@@ -35,6 +35,12 @@ ShadowedButton takes the following props
 
 Changelog: 
 
+0.2.3
+* Fixes after SVG removal left some bugs, updates to color code, next revision will be about managing layout properties with more magic and less manual work
+
+0.2.2
+* Reverted SVG additions, code was performing inconsistently across platforms as well as causing memory usage spikes on Android
+
 0.2.1
 * First draft of SVG based path backgrounds implemented, documentation/testing pending
 

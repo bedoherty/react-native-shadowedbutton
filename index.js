@@ -6,11 +6,6 @@ import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import Color from 'color';
 
-import Svg,{
-    G,
-    Path
-} from 'react-native-svg';
-
 const styles = StyleSheet.create({
   textContainer: {
     position: 'absolute',
@@ -51,14 +46,6 @@ export default class ShadowedButton extends Component {
     };
   }
 
-  measureView(event) {
-    console.log(event);
-    this.setState({
-      width: event.nativeEvent.layout.width,
-      height: event.nativeEvent.layout.height
-    });
-  }
-
   render() {
     return (
       <TouchableHighlight 
@@ -73,51 +60,33 @@ export default class ShadowedButton extends Component {
         <View style={this.props.style}
               collapsable={false}
               renderToHardwareTextureAndroid={true}
-              onLayout={(event) => this.measureView(event)}>
+              >
           <View style={styles.textContainer}>
-            <Text style={ { fontSize: this.props.fontSize, color: this.props.fontColor, fontFamily: this.props.fontFamily} }>
+            <Text style={ {  fontSize: this.props.fontSize, 
+                             color: this.props.fontColor, 
+                             fontFamily: this.props.fontFamily,
+                             top: this.state.isPressed ? (this.props.shadowHeight.toString() + "%") : 0,
+                          } }>
                 {this.props.text}
             </Text>
           </View>
-          {(this.props.svgPath && this.props.svgViewbox) ? (
-            <View style={[styles.buttonBody, {top: this.state.isPressed ? (this.props.shadowHeight.toString() + "%") : 0}]}>
-              <Svg height={(this.state.height * (100 - this.props.shadowHeight) / 100)} 
-                width={this.state.width}
-                viewBox={this.props.svgViewbox}
-                preserveAspectRatio="none">
-                <Path fill={this.props.buttonColor} d={this.props.svgPath}/>
-              </Svg>
-            </View>
-          ) : (
-            <View style={[  styles.buttonBody, 
-                          {
-                            top: this.state.isPressed ? (this.props.shadowHeight.toString() + "%") : 0,
-                            borderRadius: this.props.borderRadius, 
-                            height: ((100 - this.props.shadowHeight).toString() + "%"),  
-                            width: "100%",
-                            backgroundColor: this.props.buttonColor
-                          } 
-                      ]} />
-          )}
-          {(this.props.svgPath && this.props.svgViewbox) ? (
-            <View style={styles.buttonShadow}>
-              <Svg height={(this.state.height * (100 - this.props.shadowHeight) / 100)} 
-                width={this.state.width}
-                viewBox={this.props.svgViewbox}
-                preserveAspectRatio="none">
-                <Path fill={Color(this.props.buttonColor).darken(0.25).hex()} d={this.props.svgPath}/>
-              </Svg>
-            </View>
-          ) : (
-            <View style={[  styles.buttonShadow, 
-                          {
-                            borderRadius: this.props.borderRadius, 
-                            height: ((100 - this.props.shadowHeight).toString() + "%"),  
-                            width: "100%",
-                            backgroundColor: Color(this.props.buttonColor).darken(0.25).hex().string()
-                          } 
-                      ]} />
-          )}
+          <View style={[  styles.buttonBody, 
+                        {
+                          top: this.state.isPressed ? (this.props.shadowHeight.toString() + "%") : 0,
+                          borderRadius: this.props.borderRadius, 
+                          height: ((100 - this.props.shadowHeight).toString() + "%"),  
+                          width: "100%",
+                          backgroundColor: this.props.buttonColor
+                        } 
+                    ]} />
+          <View style={[  styles.buttonShadow, 
+                        {
+                          borderRadius: this.props.borderRadius, 
+                          height: ((100 - this.props.shadowHeight).toString() + "%"),  
+                          width: "100%",
+                          backgroundColor: Color(this.props.buttonColor).darken(0.25).string()
+                        } 
+                    ]} />
         </View>
       </TouchableHighlight>
     );

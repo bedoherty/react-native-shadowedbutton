@@ -1,12 +1,12 @@
 {
   "name": "react-native-shadowedbutton",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "private": false,
   "main": "index.js",
   "dependencies": {
     "color": "^1.0.3",
     "react": "15.4.2",
-    "react-native": "0.42.0"
+    "react-native": "^0.42.0"
   },
   "devDependencies": {
   },
