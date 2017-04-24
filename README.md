@@ -5,35 +5,46 @@ Once the package is installed, you can use it simply via:
 ```
 import ShadowedButton from 'react-native-shadowedbutton';
 
+const styles = StyleSheet.create({
+  testButton: {
+    borderRadius: 5,
+    paddingLeft: 100,
+    paddingRight: 100,
+    paddingTop: 30,
+    paddingBottom: 30,
+  },
+  testButtonFont: {
+    color: 'white',
+    fontSize: 14,
+  }
+});
+
 <ShadowedButton
-          style={ {flex: 0, height: 50, width: 400} }
-          buttonColor="#f05926"
-          fontColor="white"
-          fontSize={28}
-          fontFamily="brandon grotesque"
-          text="Test Button"
-          shadowHeight={12}
-          borderRadius={5}
-        />
+          style={ styles.testButton }
+          fontStyle = {styles.testButtonFont}
+          color="#f05926"
+          title="Test Button"
+          shadowHeight={10}
+          />
 ```
 
-This builds an orange button with white, brandon grotesque font size 28.  The buttons dimensions can be controlled via the style prop.
+This builds an orange button with white font size 14.  The buttons dimensions can be controlled via the style prop.
 
 ![Sample Button Display](http://i.imgur.com/5lmBMVa.png "Some sample buttons")
 
 ShadowedButton takes the following props
 
-* style - Style for the button container
-* buttonColor - Main color of the button
-* fontColor - Font color
-* fontSize - Font size
-* fontFamily - Font family
-* text - Text to display on the button
+* style - Button styles
+* fontStyle - StyleSheet for the inner text element
+* color - Main color of the button
+* title - Text to display on the button
+* shadowHeight - Integer value that is the percent of the view that should be shadow
 * onPress - On press handler for the button
-* borderRadius - Border radius for the button and its shadow
-* shadowHeight - Integer value that is the percent of the view that should be shadow.
 
 Changelog: 
+
+0.3.0
+* Complete rework of the component, now more resilient and the component properties are more in line with React Native standard Button.  Also addressed the issue of the component not having a real proper "min" height and width of the text it contains.
 
 0.2.3
 * Fixes after SVG removal left some bugs, updates to color code, next revision will be about managing layout properties with more magic and less manual work
